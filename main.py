@@ -12,16 +12,19 @@ if __name__ == "__main__":
     params = None
     try:
         params = extract_argv(sys.argv[1:])
-        print(params)
+        _separator = params.get("separator")
+        if _separator is not None and _separator == '\\t':
+            print("ok")
+            _separator = '\t'
         with open(params.get('file') or "data.text") as file:
             line = file.readline()
-            headerList = line[:-1].split(params.get("separator") or "\t")
+            headerList = line[:-1].split( _separator or "\t")
             ln = len(headerList)
             lineCount = 1
             while len(line) > 0:
                 line = file.readline()
                 lineCount = lineCount + 1
-                lineSplit = line[:-1].split(params.get("separator") or "\t")
+                lineSplit = line[:-1].split(_separator or "\t")
                 if len(lineSplit) > ln:
                     print("error when parsing data, the number of separator is greater than ", len(headerList) - 1,
                           "\nline ", lineCount, " ::> ", line, "\n")
