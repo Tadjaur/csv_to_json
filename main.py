@@ -14,7 +14,6 @@ if __name__ == "__main__":
         params = extract_argv(sys.argv[1:])
         _separator = params.get("separator")
         if _separator is not None and _separator == '\\t':
-            print("ok")
             _separator = '\t'
         with open(params.get('file') or "data.text") as file:
             line = file.readline()
